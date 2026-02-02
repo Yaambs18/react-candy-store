@@ -1,0 +1,46 @@
+header {
+    text-align: center;
+    background: pink;
+    color: gray;
+    margin: 0;
+    padding: 0;
+}
+
+
+header ul{
+    display: flex;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    justify-content: center;
+    top: 0%;
+    width: 100%;
+    z-index: 1;
+}
+
+header li{
+    margin: 0 40px;
+}
+
+header .cart {
+    margin-left: auto;
+    margin-right: 40px;
+}
+
+@media (max-width: 552px) {
+    header li {
+        margin: 0 10px;
+    }
+
+}
+
+@media (max-width: 768px) {
+    header {
+        padding-bottom: 0;
+    }
+    header h1 {
+        padding-top: 120px;
+        font-size: 60px;
+    }
+}
