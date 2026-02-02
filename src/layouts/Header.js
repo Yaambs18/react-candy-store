@@ -1,12 +1,15 @@
 import { Button } from "react-bootstrap";
 import "./Header.css";
+import { Link } from "react-router-dom";
 
 const Header = (props) => {
     return (
         <header>
             <nav className="navbar navbar-expand-md">
                 <ul className="navbar-nav">
-                    <li className="nav-item">Candy Store</li>
+                    <Link to='/' className="nav-link">
+                        <li className="nav-item">Candy Store</li>
+                    </Link>
                     <li className="nav-item cart">
                         <Button variant="secondary" className="cart-button" onClick={props.onCartClick}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-cart" viewBox="0 0 16 16">

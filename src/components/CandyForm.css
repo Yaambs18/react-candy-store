@@ -1,0 +1,23 @@
+.candy-add-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f5b6d3;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+}
+
+.candy-add-form button {
+    background: #e21172a2;
+    border: none;
+    width: fit-content;
+    margin: auto;
+    font-weight: bold;
+    padding: 0.5rem;
+}
+
+.candy-add-form button:hover,
+.candy-add-form button:active {
+    background: #e21172;
+    border: none;
+}
