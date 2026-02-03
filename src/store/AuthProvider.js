@@ -12,35 +12,18 @@ const defaultAuthState = {
 const AuthProvider = (props) => {
     const [authState, setAuthState] = useState(defaultAuthState);
 
-    const loginHandler = async (email, password) => {
+    const loginHandler = async (email, token) => {
         try {
-            const response = await fetch(
-                process.env.REACT_APP_LOGIN_API_URL,
-                {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        email,
-                        password
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }
-            );
-
-            const data = await response.json();
-            if (!response.ok) {
-                throw new Error(data.error.message || 'Login failed');
-            }
+            
             setAuthState(prevState => {
                 return {
                     ...prevState,
                     isLoggedIn: true,
-                    token: data.tokenId,
+                    token: token,
                     userEmail: email
                 }
             });
-            localStorage.setItem('token', data.tokenId);
+            localStorage.setItem('token', token);
             localStorage.setItem('userEmail', email);
         } catch (error) {
             console.error("Login failed:", error);

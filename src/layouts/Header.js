@@ -1,8 +1,17 @@
 import { Button } from "react-bootstrap";
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../store/AuthContext";
 
 const Header = (props) => {
+    const authCtx = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const loginClickHandler = () => {
+        navigate('/auth');
+    }
+
     return (
         <header>
             <nav className="navbar navbar-expand-md">
@@ -17,6 +26,20 @@ const Header = (props) => {
                             </svg> Cart ({2})
                         </Button>
                     </li>
+                    { !authCtx.isLoggedIn &&
+                        <li className="nav-item">
+                            <Button className="login-button" onClick={loginClickHandler}>
+                                Login
+                            </Button>
+                        </li>
+                    }
+                    { authCtx.isLoggedIn &&
+                        <li className="nav-item">
+                            <Button className="logout-button" onClick={authCtx.onLogout}>
+                                Logout
+                            </Button>
+                        </li>
+                    }
                 </ul>
             </nav>
         </header>

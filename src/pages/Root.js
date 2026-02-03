@@ -11,8 +11,8 @@ const Root = () => {
     return (
         <div className='App'>
             <Header />
-            <main className='container' style={{ marginTop: '100px' }}>
-                <h1>Welcome to Candy Store</h1>
+            <main className='container'>
+                {/* <h1>Welcome to Candy Store</h1> */}
                 { location.pathname.endsWith("/") && <NavLink to='/candies'>
                     <Button variant="primary">Shop Now</Button>
                 </NavLink>}
