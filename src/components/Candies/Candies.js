@@ -32,7 +32,7 @@ const Candies = (props) => {
         setIsLoading(true);
         setError(null);
         try {
-            const response = await fetch("https://crudcrud.com/api/5532a05a2f67488fa168287a4682d7c0/candies", {
+            const response = await fetch(`${process.env.REACT_APP_FIREBASE_DATABASE_URL}candies.json`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -42,17 +42,26 @@ const Candies = (props) => {
             if (!response.ok) {
                 throw new Error(data.error.message || "Failed to fetch candies");
             }
-            console.log(data);
-            if (!data.candies) {
+            if (!data || Object.keys(data).length === 0) {
                 setCandies(dummyCandies);
                 return;
             }
-            setCandies(data.candies || []);
+            const loadedCandies = [];
+            for (const key in data) {
+                loadedCandies.push({
+                    id: key,
+                    name: data[key].name,
+                    description: data[key].description,
+                    price: data[key].price,
+                    imageUrl: data[key].imageUrl
+                })
+            }
+            setCandies(loadedCandies);
         } catch (error) {
             // setError(error.message);
             console.error("Error fetching candies:", error);
         } finally {
-            setCandies(dummyCandies);
+            // setCandies(dummyCandies);
             setIsLoading(false);
         }
     })

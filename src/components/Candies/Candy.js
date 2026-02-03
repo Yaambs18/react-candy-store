@@ -1,10 +1,18 @@
+import { useContext } from "react";
 import { Button, Card } from "react-bootstrap";
+import CartContext from "../../store/CartContext";
 
 const Candy = (props) => {
     const { candy } = props;
+    
+    const cartCtx = useContext(CartContext);
 
     const addCartHandler = () => {
         console.log(`Adding ${JSON.stringify(candy)} to cart.`);
+        cartCtx.addItem({
+            ...candy,
+            quantity: 1
+        })
     }
 
     return (

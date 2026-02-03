@@ -1,5 +1,5 @@
 import { Button } from "react-bootstrap";
-import Candies from "../components/Candies";
+import Candies from "../components/Candies/Candies";
 import { useNavigate } from "react-router-dom";
 
 const CandiesPage = (props) => {

@@ -1,4 +1,4 @@
-import CandyAddForm from "../components/CandyAddForm";
+import CandyAddForm from "../components/Candies/CandyAddForm";
 
 const AddCandy = (props) => {
     return (
