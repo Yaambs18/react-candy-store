@@ -1,6 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import Candy from "./Candy";
+import AIRecommendation from "./AIRecommendation";
+import CartContext from "../../store/CartContext";
 
 const dummyCandies = [
     {
@@ -27,6 +29,14 @@ const Candies = (props) => {
     const [isLoading, setIsLoading] = useState(false);
     const [candies, setCandies] = useState([]);
     const [error, setError] = useState (null);
+
+    const cartCtx = useContext(CartContext);
+
+    const [openAIRecommendation, setOpenAiRecommendation] = useState(false);
+
+    const modalCloseHandler = () => {
+        setOpenAiRecommendation(!openAIRecommendation);
+    }
 
     const fetchCandies = useCallback(async () => {
         setIsLoading(true);
@@ -78,6 +88,9 @@ const Candies = (props) => {
             }
             { !isLoading && !error && candies.length > 0 &&
                 <ul className="candy-list d-flex flex-wrap gap-3 list-unstyled justify-content-center m-4">
+                    
+                {openAIRecommendation && <AIRecommendation onClose={modalCloseHandler} cartItems={cartCtx.items} candyList={candies}/>}
+                <button className="btn btn-secondary ai-recommend-btn" onClick={modalCloseHandler}>Recommendation (AI)</button>
                     {candies.map((candy) => {
                         return <Candy key={candy.id} candy={candy} />;
                     })}
