@@ -5,6 +5,8 @@ import CandiesPage from './pages/CandiesPage';
 import { Suspense } from 'react';
 import AuthProvider from './store/AuthProvider';
 import Auth from './pages/Auth';
+import PublicRoutes from './pages/PublicRoutes';
+import ProtectedRoutes from './pages/ProtectedRoutes';
 
 const router = createBrowserRouter([
   {
@@ -12,16 +14,26 @@ const router = createBrowserRouter([
     element: <Root />,
     children: [
       {
-        path: '/auth',
-        element: <Auth />,
+        element: <PublicRoutes />,
+        children: [
+          {
+            path: '/auth',
+            element: <Auth />,
+          },
+        ]
       },
       {
-        path: '/candies',
-        element: <CandiesPage />,
-      },
-      {
-        path: '/add-candy',
-        element: <AddCandy />,
+        element: <ProtectedRoutes />,
+        children: [
+          {
+            path: '/candies',
+            element: <CandiesPage />,
+          },
+          {
+            path: '/add-candy',
+            element: <AddCandy />,
+          }
+        ]
       }
     ]
   },

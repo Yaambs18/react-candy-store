@@ -81,7 +81,7 @@ const CartProvider = (props) => {
 
     const authCtx = useContext(AuthContext);
 
-    const apiUrl = `https://crudcrud.com/api/51b58b84bfad4b32bdee9debf7acc2a4/${authCtx.userEmail.replace(/[@.]/g, '')}cart`;
+    const apiUrl = `https://crudcrud.com/api/51b58b84bfad4b32bdee9debf7acc2a4/${authCtx.userEmail?.replace(/[@.]/g, '')}cart`;
 
     useEffect(() => {
         async function fetchCart() {
@@ -109,8 +109,8 @@ const CartProvider = (props) => {
                 return cartItem.id === item.id;
             });
             const existingCartItem = cartState.items[existingCartItemIndex];
-            const { _id, ...itemWithoutID } = existingCartItem;
             if (existingCartItem) {
+                const { _id, ...itemWithoutID } = existingCartItem;
                 const updatedItem = {
                     ...itemWithoutID,
                     quantity: existingCartItem.quantity + item.quantity
@@ -157,11 +157,11 @@ const CartProvider = (props) => {
             return cartItem.id === id;
         });
         const existingCartItem = cartState.items[existingCartItemIndex];
-        const { _id, ...itemWithoutID } = existingCartItem;
-
+        
         if (!existingCartItem) {
             return;
         }
+        const { _id, ...itemWithoutID } = existingCartItem;
         if (existingCartItem.quantity === 1) {
             const response = await fetch(
                 `${apiUrl}/${_id}`,
